@@ -1,0 +1,23 @@
+.btn {
+    width: 100px;
+    margin-block: 10px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
+.div {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 10px;
+}
+
+.desc {
+    margin-left: 25px;
+}
+
+.info {
+    border-block: 1px solid gray;
+}
