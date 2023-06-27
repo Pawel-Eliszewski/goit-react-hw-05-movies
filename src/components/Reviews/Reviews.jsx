@@ -14,7 +14,7 @@ export default function Reviews() {
 
   return (
     <>
-      {movieReviews.length !== 0 ? (
+      {movieReviews.length > 0 ? (
         <ul>
           {movieReviews.map(review => {
             return (

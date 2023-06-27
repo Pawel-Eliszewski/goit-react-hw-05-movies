@@ -10,6 +10,7 @@ import { fetchMovieDetailsById } from 'services/fetchMovieDetailsById';
 import { getMovieYear } from 'utils/getMovieYear';
 import { getMovieVote } from 'utils/getMovieVote';
 import { getMovieGenres } from 'utils/getMovieGenres';
+import { Loader } from 'components/Loader';
 import css from './MovieDetails.module.css';
 
 export default function MovieDetails() {
@@ -23,16 +24,18 @@ export default function MovieDetails() {
   }, [movieId]);
 
   const handleGoBack = () => {
-    if (location.state === 'home') {
+    if (location.state.from === 'home') {
       navigate('/');
     } else {
-      navigate(-1);
+      navigate(`/movies?${location.state.query}`);
     }
   };
 
   return (
     <main className={css.main}>
-      <button onClick={handleGoBack} className={css.btn}>&larr; Go back</button>
+      <button onClick={handleGoBack} className={css.btn}>
+        &larr; Go back
+      </button>
       <div className={css.div}>
         <img
           className={css.img}
@@ -56,14 +59,18 @@ export default function MovieDetails() {
         <h6>Additional information</h6>
         <ul>
           <li>
-            <Link to={`cast`}>Cast</Link>
+            <Link to={`cast`} state={location.state}>
+              Cast
+            </Link>
           </li>
           <li>
-            <Link to={`reviews`}>Reviews</Link>
+            <Link to={`reviews`} state={location.state}>
+              Reviews
+            </Link>
           </li>
         </ul>
       </div>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </main>

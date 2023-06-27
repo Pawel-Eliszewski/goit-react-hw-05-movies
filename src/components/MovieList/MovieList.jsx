@@ -3,13 +3,16 @@ import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 import css from './MovieList.module.css';
 
-export const MovieList = ({ movies, fromPage }) => {
+export const MovieList = ({ movies, query, fromPage }) => {
   return (
     <ul className={css.list}>
       {movies.map(movie => {
         return (
           <li key={nanoid()} id={movie.id} className={css.item}>
-            <Link to={`/movies/${movie.id}`} state={{ from: fromPage }}>
+            <Link
+              to={`/movies/${movie.id}`}
+              state={{ query: query, from: fromPage }}
+            >
               {movie.title || movie.name}
             </Link>
           </li>

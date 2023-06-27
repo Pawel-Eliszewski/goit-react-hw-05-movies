@@ -1,4 +1,7 @@
-export const fetchTrendingMovies = async ({ setTrendingMovies }) => {
+export const fetchTrendingMovies = async ({
+  setIsLoading,
+  setTrendingMovies,
+}) => {
   const options = {
     method: 'GET',
     headers: {
@@ -10,12 +13,14 @@ export const fetchTrendingMovies = async ({ setTrendingMovies }) => {
 
   await fetch('https://api.themoviedb.org/3/trending/movie/day', options)
     .then(response => {
+      setIsLoading(true);
       if (!response.ok) {
         throw new Error(response.status);
       }
       return response.json();
     })
     .then(data => {
+      setIsLoading(false);
       setTrendingMovies(data.results);
     })
     .catch(err => {

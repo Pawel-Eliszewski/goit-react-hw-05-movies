@@ -37,7 +37,11 @@ export default function Movies() {
       </form>
       <Outlet />
       {queryMovies.length > 0 ? (
-        <MovieList movies={queryMovies} fromPage="movies" />
+        <MovieList
+          movies={queryMovies}
+          query={searchParams.toString()}
+          fromPage="movies"
+        />
       ) : null}
     </div>
   );
