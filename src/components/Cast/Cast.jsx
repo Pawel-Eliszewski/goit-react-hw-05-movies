@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchMovieCast } from 'services/fetchMovieCast';
 import { nanoid } from 'nanoid';
+import Api from 'services/api';
 import css from './Cast.module.css';
 
 export default function Cast() {
@@ -9,7 +9,7 @@ export default function Cast() {
   const { movieId } = useParams();
 
   useEffect(() => {
-    fetchMovieCast({ movieId, setMovieCast });
+    Api.fetchMovieCast(movieId, setMovieCast);
   }, [movieId]);
 
   return (
@@ -28,7 +28,7 @@ export default function Cast() {
                   ></img>
                 ) : (
                   <img
-                    src={'./actorsMissingImg.png'}
+                    src={require('../../images/noImgPlaceholder.jpg')}
                     width="100"
                     height="150"
                     alt={actor.name}

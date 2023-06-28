@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchMovieReviews } from 'services/fetchMovieReviews';
 import { nanoid } from 'nanoid';
+import Api from 'services/api';
 import css from './Reviews.module.css';
 
 export default function Reviews() {
@@ -9,7 +9,7 @@ export default function Reviews() {
   const { movieId } = useParams();
 
   useEffect(() => {
-    fetchMovieReviews({ movieId, setMovieReviews });
+    Api.fetchMovieReviews(movieId, setMovieReviews);
   }, [movieId]);
 
   return (

@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Suspense, useState, useEffect } from 'react';
+import { useSearchParams, Outlet } from 'react-router-dom';
 import { nanoid } from 'nanoid';
-import { fetchQueryMovies } from 'services/fetchQueryMovies';
-import { Outlet } from 'react-router-dom';
+import { Loader } from 'components/Loader/Loader';
 import { MovieList } from 'components/MovieList/MovieList';
+import Api from 'services/api';
 import css from './Movies.module.css';
 
 export default function Movies() {
@@ -19,7 +19,7 @@ export default function Movies() {
 
   useEffect(() => {
     const query = searchParams.toString().slice(6);
-    fetchQueryMovies({ query, setQueryMovies });
+    Api.fetchQueryMovies(query, setQueryMovies);
   }, [searchParams]);
 
   return (
@@ -35,14 +35,16 @@ export default function Movies() {
         />
         <button type="submit">Search</button>
       </form>
-      <Outlet />
-      {queryMovies.length > 0 ? (
-        <MovieList
-          movies={queryMovies}
-          query={searchParams.toString()}
-          fromPage="movies"
-        />
-      ) : null}
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+        {queryMovies.length > 0 ? (
+          <MovieList
+            movies={queryMovies}
+            query={searchParams.toString()}
+            fromPage="movies"
+          />
+        ) : null}
+      </Suspense>
     </div>
   );
 }
