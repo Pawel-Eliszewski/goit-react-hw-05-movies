@@ -1,0 +1,14 @@
+.list {
+    padding: 0;
+    margin-left: 35px;
+}
+
+.item {
+    list-style: none;
+}
+
+.name::before {
+    content: " \25CF";
+    left: 45px;
+    position: absolute;
+}

@@ -15,7 +15,7 @@ export default function Cast() {
   return (
     <>
       {movieCast.length !== 0 ? (
-        <ul>
+        <ul className={css.list}>
           {movieCast.map(actor => {
             return (
               <li key={nanoid()} id={actor.id} className={css.item}>
@@ -34,7 +34,7 @@ export default function Cast() {
                     alt={actor.name}
                   ></img>
                 )}
-                <p>{actor.name}</p>
+                <p className={css.name}>{actor.name}</p>
                 <p>Character: {actor.character}</p>
               </li>
             );
