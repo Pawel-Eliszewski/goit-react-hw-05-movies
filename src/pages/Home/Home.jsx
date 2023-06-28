@@ -3,7 +3,6 @@ import { Outlet } from 'react-router-dom';
 import { Loader } from 'components/Loader/Loader';
 import { MovieList } from 'components/MovieList/MovieList';
 import Api from 'services/api';
-import css from './Home.module.css';
 
 export default function Home() {
   const [trendingMovies, setTrendingMovies] = useState([]);
